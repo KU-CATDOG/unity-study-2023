@@ -10,6 +10,8 @@ public class Ball : MonoBehaviour
     private float maxSpeed;
     [SerializeField]
     private float jumpForce;
+    [SerializeField]
+    private float friction;
 
     private Rigidbody2D rigid2d;
 
@@ -22,6 +24,8 @@ public class Ball : MonoBehaviour
     {
         Move();
         Jump();
+
+        rigid2d.velocity = new Vector2(rigid2d.velocity.x * friction, rigid2d.velocity.y);
     }
 
     private void Move()
@@ -39,6 +43,10 @@ public class Ball : MonoBehaviour
 
         rigid2d.velocity = new Vector2(rigid2d.velocity.x, 0);
         rigid2d.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+
+        var step = ray.collider.GetComponent<IStep>();
+        if (step == null) return;
+        step.OnStep(this);
     }
 
     // private void OnDrawGizmos()
