@@ -49,6 +49,12 @@ public class Ball : MonoBehaviour
         step.OnStep(this);
     }
 
+    public void Die()
+    {
+        GameManager.Inst.StageFail();
+        Destroy(gameObject);
+    }
+
     // private void OnDrawGizmos()
     // {
     //     Debug.DrawRay(transform.position, Vector2.down * 0.36f);
