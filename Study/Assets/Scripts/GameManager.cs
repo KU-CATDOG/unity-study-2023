@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    private StarCount sc;
     private int starCount = 0;
     public int StarCount
     {
@@ -25,6 +27,7 @@ public class GameManager : MonoBehaviour
         {
             starCount = value;
 
+            sc.UpdateText(starCount);
             if (starCount <= 0)
                 StageClear();
         }
